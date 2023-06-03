@@ -46,6 +46,16 @@ def load_data():
 
 df_agg, df_agg_sub, df_comments, df_time = load_data()
 
-add_sidebar = st.sidebar.selectbox('Aggregate or Individual Video', ('Aggregate Metrics','Individual Video Analysis'))
+#engineer data
+df_agg_diff = df_agg.copy()
+metric_date_12mo = df_agg_diff['Video publish time'].max() - pd.DateOffset(months=12)
+one_year_agg = df_agg_diff[df_agg_diff['Video publish time'] >= metric_date_12mo]
+
+numeric_cols = np.array((df_agg_diff.dtypes == 'float64') | (df_agg_diff.dtypes == 'int64'))
+median_agg = one_year_agg.iloc[:, numeric_cols].median()
+df_agg_diff =
+
+
+add_sidebar = st.sidebar.selectbox('Aggregate or Individual Video', ('Aggregate Metrics', 'Individual Video Analysis'))
 
 print('End of code')
