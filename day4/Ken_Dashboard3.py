@@ -73,4 +73,10 @@ views_cumulative.loc[:, ['median_views', '80pct_views', '20pct_views']] = views_
 
 add_sidebar = st.sidebar.selectbox('Aggregate or Individual Video', ('Aggregate Metrics', 'Individual Video Analysis'))
 
+if add_sidebar == 'Aggregate Metrics':
+    st.write('Agg')
+
+if add_sidebar == 'Individual Video Analysis':
+    st.write('Ind')
+
 print('End of code')
