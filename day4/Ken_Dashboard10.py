@@ -5,7 +5,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import streamlit as st
 from datetime import datetime
-import os
+from pathlib import Path
 
 
 # Define Functions
@@ -39,7 +39,7 @@ def audience_simple(country):
 @st.cache_data
 def load_data():
     # df_agg = pd.read_csv('./data/Aggregated_Metrics_By_Video.csv')
-    df_agg = pd.read_csv(os.path.join('./data/Aggregated_Metrics_By_Video.csv'))
+    df_agg = pd.read_csv(Path(__file__).parents[0] / 'data/Aggregated_Metrics_By_Video.csv')
 
     df_agg = df_agg.iloc[1:, :]
     df_agg.columns = [
@@ -66,12 +66,12 @@ def load_data():
     df_agg.sort_values('Video publish time', ascending=False, inplace=True)
 
     # df_agg_sub = pd.read_csv('./data/Aggregated_Metrics_By_Country_And_Subscriber_Status.csv')
-    df_agg_sub = pd.read_csv(os.path.join('./data/Aggregated_Metrics_By_Country_And_Subscriber_Status.csv'))
+    df_agg_sub = pd.read_csv(Path(__file__).parents[0] / 'data/Aggregated_Metrics_By_Country_And_Subscriber_Status.csv')
 
     # df_comments = pd.read_csv('./data/Aggregated_Metrics_By_Video.csv')
-    df_comments = pd.read_csv(os.path.join('./data/Aggregated_Metrics_By_Video.csv'))
+    df_comments = pd.read_csv(Path(__file__).parents[0] / 'data/Aggregated_Metrics_By_Video.csv')
     # df_time = pd.read_csv('./data/Video_Performance_Over_Time.csv')
-    df_time = pd.read_csv(os.path.join('./data/Video_Performance_Over_Time.csv'))
+    df_time = pd.read_csv(Path(__file__).parents[0] / 'data/Video_Performance_Over_Time.csv')
     df_time['Date'] = pd.to_datetime(df_time['Date'].apply(lambda x: x.replace('Sept', 'Sep')))
 
     return df_agg, df_agg_sub, df_comments, df_time
